@@ -1,5 +1,8 @@
 module App
 
+using Pkg
+Pkg.activate(".")
+
 include("./CodeBlockExecuter.jl")
 using .CodeBlockExecuter
 
