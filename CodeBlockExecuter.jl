@@ -36,4 +36,4 @@ function main()
   wait(c)
 end
 
-end; CodeBlockResponse.main()
+end
