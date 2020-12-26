@@ -1,6 +1,7 @@
 module ReplyHandler
 
 include("./MessageContents.jl")
+include("./CmdExec.jl")
 
 using Discord
 
@@ -16,8 +17,7 @@ function call(c::Client, e::MessageCreate)
   reply_message = MessageContents.DEFAULT
 
   if !isnothing(m)
-    cmd = Cmd(["julia", "-e", string(m[1])])
-    reply_message = read(cmd, String)
+    reply_message = CmdExec.call(string(m[1]))
 
     if reply_message == ""
       reply_message = MessageContents.REPLY
