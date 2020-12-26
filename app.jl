@@ -1,13 +1,6 @@
-module App
-
 using Pkg
 Pkg.activate(".")
 
-include("./CodeBlockExecuter.jl")
-using .CodeBlockExecuter
+include("./src/CodeBlockExecuter.jl")
 
-function call()
-  CodeBlockExecuter.main()
-end
-
-end; App.call()
+CodeBlockExecuter.call()
