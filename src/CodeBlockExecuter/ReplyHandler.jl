@@ -18,7 +18,7 @@ function call(c::Client, e::MessageCreate)
 
   if !isnothing(m)
     cmd = string(m[1])
-    if ngword(cmd)
+    if ngword(cmd) || parse_ngword(cmd)
       create(c, Reaction, e.message, "😡")
       return
     end
@@ -50,6 +50,14 @@ ngword(cmd::String) = begin
   !isnothing(matched) && return true
 
   return false
+end
+
+parse_ngword(cmd::String) = begin
+  parse_cmd = match(r"(?<=parse\()(.+)(?=\))", cmd)
+
+  isnothing(parse_cmd) && return false
+
+  parse_cmd[1] |> Meta.parse |> eval |> ngword
 end
 
 end
