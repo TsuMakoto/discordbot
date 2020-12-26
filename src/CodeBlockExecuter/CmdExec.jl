@@ -3,7 +3,7 @@ module CmdExec
 function call(usercmd::String)
   cmd = Cmd([
              "julia",
-             "-e",
+             "-E",
              usercmd,
              ">",
              "result.txt",
