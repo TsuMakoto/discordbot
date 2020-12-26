@@ -17,7 +17,13 @@ function call(c::Client, e::MessageCreate)
   reply_message = MessageContents.DEFAULT
 
   if !isnothing(m)
-    reply_message = CmdExec.call(string(m[1]))
+    cmd = string(m[1])
+    if ngword(cmd)
+      create(c, Reaction, e.message, "😡")
+      return
+    end
+
+    reply_message = CmdExec.call(cmd)
 
     if reply_message == ""
       reply_message = MessageContents.REPLY
@@ -29,5 +35,17 @@ function call(c::Client, e::MessageCreate)
 end
 
 usernames(mentions::Array{User, 1}) = map(mention -> mention.username, mentions)
+
+ngword(cmd::String) = begin
+  matched = match(r"run(.+)", cmd)
+
+  !isnothing(matched) && return true
+
+  matched = match(r"read(.+)", cmd)
+
+  !isnothing(matched) && return true
+
+  return false
+end
 
 end
