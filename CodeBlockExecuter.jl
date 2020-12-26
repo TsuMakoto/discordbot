@@ -1,7 +1,7 @@
 module CodeBlockExecuter
 
-include("./Message.jl")
-using Message
+include("./MessageContents.jl")
+using .MessageContents
 
 using Discord
 
@@ -17,18 +17,18 @@ function handler(c::Client, e::MessageCreate)
     return
   end
 
-  regex = Message.REGEX
+  regex = MessageContents.REGEX
 
   m = match(regex, body)
 
-  reply_message = Message.DEFAULT
+  reply_message = MessageContents.DEFAULT
 
   if !isnothing(m)
     cmd = Cmd(["julia", "-e", string(m[1])])
     parseresult = read(cmd, String)
 
     if parseresult != ""
-      reply_message = Message.REPLY
+      reply_message = MessageContents.REPLY
     end
   end
 
