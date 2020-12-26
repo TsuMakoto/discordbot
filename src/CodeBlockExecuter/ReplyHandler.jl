@@ -45,6 +45,10 @@ ngword(cmd::String) = begin
 
   !isnothing(matched) && return true
 
+  matched = match(r"open(.+)", cmd)
+
+  !isnothing(matched) && return true
+
   return false
 end
 
