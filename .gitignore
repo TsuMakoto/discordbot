@@ -1,3 +1,4 @@
 .env
 exe/out.txt
 exe/cmd.jl
+discordbot_julia_cmd/
