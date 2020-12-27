@@ -18,10 +18,10 @@ function call(c::Client, e::MessageCreate)
 
   if !isnothing(m)
     cmd = string(m[1])
-    if ngword(cmd) || parse_ngword(cmd)
-      create(c, Reaction, e.message, "😡")
-      return
-    end
+    # if ngword(cmd) || parse_ngword(cmd)
+    #   create(c, Reaction, e.message, "😡")
+    #   return
+    # end
 
     reply_message = CmdExec.call(cmd)
 
@@ -36,28 +36,28 @@ end
 
 usernames(mentions::Array{User, 1}) = map(mention -> mention.username, mentions)
 
-ngword(cmd::String) = begin
-  matched = match(r"run(.+)", cmd)
-
-  !isnothing(matched) && return true
-
-  matched = match(r"read(.+)", cmd)
-
-  !isnothing(matched) && return true
-
-  matched = match(r"open(.+)", cmd)
-
-  !isnothing(matched) && return true
-
-  return false
-end
-
-parse_ngword(cmd::String) = begin
-  parse_cmd = match(r"(?<=parse\()(.+)(?=\))", cmd)
-
-  isnothing(parse_cmd) && return false
-
-  parse_cmd[1] |> Meta.parse |> eval |> ngword
-end
+# ngword(cmd::String) = begin
+#   matched = match(r"run(.+)", cmd)
+#
+#   !isnothing(matched) && return true
+#
+#   matched = match(r"read(.+)", cmd)
+#
+#   !isnothing(matched) && return true
+#
+#   matched = match(r"open(.+)", cmd)
+#
+#   !isnothing(matched) && return true
+#
+#   return false
+# end
+#
+# parse_ngword(cmd::String) = begin
+#   parse_cmd = match(r"(?<=parse\()(.+)(?=\))", cmd)
+#
+#   isnothing(parse_cmd) && return false
+#
+#   parse_cmd[1] |> Meta.parse |> eval |> ngword
+# end
 
 end
