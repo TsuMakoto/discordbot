@@ -7,5 +7,6 @@ RUN julia -e 'using Pkg;            \
                   "UnicodePlots",   \
                   "TestImages",     \
                   "ImageInTerminal" \
+                  "ImageMagick" \
               ]);                   \
 Pkg.precompile()'
